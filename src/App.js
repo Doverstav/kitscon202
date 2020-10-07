@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Home from "./pages/Home";
+import Ads from "./pages/Ads";
+import ExclusiveContent from "./pages/ExclusiveContent";
+
+const ADS = "Ads";
+const EXCLUSIVE_CONTENT = "ExclusiveContent";
+const HOME = "Home";
 
 function App() {
+  const [activePage, setActivePage] = useState("");
+  const [displayedComponent, setDisplayedComponent] = useState(<Home />);
+
+  useEffect(() => {
+    if (activePage === ADS) {
+      setDisplayedComponent(<Ads />);
+    } else if (activePage === EXCLUSIVE_CONTENT) {
+      setDisplayedComponent(<ExclusiveContent />);
+    } else {
+      setDisplayedComponent(<Home />);
+    }
+  }, [activePage]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div className="App">
+    <button onClick={() => setActivePage(HOME)}>Home</button>
+    <button onClick={() => setActivePage(ADS)}>Ads</button>
+    <button onClick={() => setActivePage(EXCLUSIVE_CONTENT)}>ExclusiveContent</button>
+    {displayedComponent}
+    </div>)
+  ;
 }
 
 export default App;
