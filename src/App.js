@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Home from "./pages/Home";
-import Ads from "./pages/Ads";
-import ExclusiveContent from "./pages/ExclusiveContent";
+import Home from "./components/Home";
+import Ads from "./components/Ads/Ads";
+import ExclusiveContent from "./components/ExclusiveContent/ExclusiveContent";
+import WebMonetizationSpoofer from "./components/WebMonetizationSpoofer/WebMonetizationSpoofer";
 
 const ADS = "Ads";
 const EXCLUSIVE_CONTENT = "ExclusiveContent";
@@ -24,13 +25,16 @@ function App() {
   }, [activePage]);
 
   return (
-  <div className="App">
-    <button onClick={() => setActivePage(HOME)}>Home</button>
-    <button onClick={() => setActivePage(ADS)}>Ads</button>
-    <button onClick={() => setActivePage(EXCLUSIVE_CONTENT)}>ExclusiveContent</button>
-    {displayedComponent}
-    </div>)
-  ;
+    <div className="App">
+      <button onClick={() => setActivePage(HOME)}>Home</button>
+      <button onClick={() => setActivePage(ADS)}>Ads</button>
+      <button onClick={() => setActivePage(EXCLUSIVE_CONTENT)}>
+        ExclusiveContent
+      </button>
+      {displayedComponent}
+      <WebMonetizationSpoofer />
+    </div>
+  );
 }
 
 export default App;
