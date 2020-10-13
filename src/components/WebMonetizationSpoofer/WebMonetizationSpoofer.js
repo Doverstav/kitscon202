@@ -108,7 +108,9 @@ export default function WebMonetizationSpoofer(props) {
   }, []);
 
   useEffect(() => {
-    wmTag.current = document.head.querySelector('meta[name="monetization"]');
+    wmTag.current = document.head.querySelector(
+      'meta[name="monetization"]'
+    ).content;
     setIsWebMonetized(!!wmTag.current);
   }, []); // Should run more often than mount/unmount
 
