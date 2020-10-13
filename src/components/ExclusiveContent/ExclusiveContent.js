@@ -1,8 +1,12 @@
 import React from "react";
-import { useMonetizationState } from "react-web-monetization";
+import {
+  useMonetizationCounter,
+  useMonetizationState,
+} from "react-web-monetization";
 
 export default function Home(props) {
   const monetization = useMonetizationState();
+  const counter = useMonetizationCounter();
 
   return (
     <div>
@@ -19,6 +23,12 @@ export default function Home(props) {
       {!monetization.state || monetization.state === "stopped" ? (
         <p>Unlock this content by signing up with Coil</p>
       ) : null}
+      <p>Dosh sent: 
+        {(counter.totalAmount / 10 ** counter.assetScale).toFixed(
+          counter.assetScale
+        )}
+        {counter.assetCode}
+      </p>
     </div>
   );
 }
