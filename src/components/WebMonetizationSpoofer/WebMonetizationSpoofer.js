@@ -28,7 +28,7 @@ export default function WebMonetizationSpoofer(props) {
         paymentPointer: wmTag.current,
         amount: 1,
         assetCode: "SEK",
-        assetScale: 2,
+        assetScale: 3,
       },
     });
 
