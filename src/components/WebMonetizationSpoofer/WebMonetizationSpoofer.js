@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../../WMSpoofer.css";
+import "./WMSpoofer.css";
+import Button from "../common/Button";
 
 const WM_STATE_STOPPED = "stopped";
 const WM_STATE_PENDING = "pending";
@@ -115,15 +116,15 @@ export default function WebMonetizationSpoofer(props) {
   }, []); // Should run more often than mount/unmount
 
   return (
-    <div className="container">
+    <div className="WMSpoofer-container">
       <p>Here we can show some status about WM</p>
       <p>
         Web Monetization tag: {isWebMonetized ? "Exists" : "Does not exist"}
       </p>
       <p>Web Monetization is: {wmStatus}</p>
       <p>Maybe show money sent here, with an option to reset!</p>
-      <button onClick={() => toggleWM()}>Click me to start/stop WM</button>
-      <button>I am another button</button>
+      <Button onClick={() => toggleWM()} text={"Click me to start/stop WM"} />
+      <Button text={"I am another button"} />
       <label>Some slidervalue: {sliderValue}</label>
       <input
         type="range"

@@ -1,0 +1,8 @@
+.Separator {
+  height: 0px;
+  width: 100%;
+
+  border-top: 2px solid black;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

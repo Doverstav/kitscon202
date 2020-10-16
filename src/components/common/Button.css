@@ -1,0 +1,21 @@
+.Button {
+  cursor: pointer;
+
+  background-color: white;
+  color: #f37f4a;
+  
+  border-radius: 5px;
+  border: 2px solid #f37f4a;
+
+  font-size: 16px;
+
+  margin: 4px 0px;
+  padding: 4px 8px;
+}
+
+.Button-active {
+  border: 2px solid #f37f4a;
+  color: white;
+  background-color: #f37f4a;
+  font-weight: 600;
+}

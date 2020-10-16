@@ -5,13 +5,15 @@ import Home from "./components/Home";
 import Ads from "./components/Ads/Ads";
 import ExclusiveContent from "./components/ExclusiveContent/ExclusiveContent";
 import WebMonetizationSpoofer from "./components/WebMonetizationSpoofer/WebMonetizationSpoofer";
+import Button from "./components/common/Button";
+import Separator from "./components/common/Separator";
 
 const ADS = "Ads";
 const EXCLUSIVE_CONTENT = "ExclusiveContent";
 const HOME = "Home";
 
 function App() {
-  const [activePage, setActivePage] = useState("");
+  const [activePage, setActivePage] = useState(HOME);
   const [displayedComponent, setDisplayedComponent] = useState(<Home />);
 
   useEffect(() => {
@@ -26,13 +28,28 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => setActivePage(HOME)}>Home</button>
-      <button onClick={() => setActivePage(ADS)}>Ads</button>
-      <button onClick={() => setActivePage(EXCLUSIVE_CONTENT)}>
-        ExclusiveContent
-      </button>
-      {displayedComponent}
-      <WebMonetizationSpoofer />
+      <div className="sidebar">
+        <Button
+          onClick={() => setActivePage(HOME)}
+          text={"Home"}
+          active={activePage === HOME}
+        />
+        <Button
+          onClick={() => setActivePage(ADS)}
+          text={"Ads"}
+          active={activePage === ADS}
+        />
+        <Button
+          onClick={() => setActivePage(EXCLUSIVE_CONTENT)}
+          text={"Exclusive Content"}
+          active={activePage === EXCLUSIVE_CONTENT}
+        />
+        <Separator />
+        <WebMonetizationSpoofer />
+      </div>
+      <div className="content">
+        <div className="content-inner">{displayedComponent}</div>
+      </div>
     </div>
   );
 }
