@@ -8,6 +8,7 @@
   border: 2px solid #f37f4a;
 
   font-size: 16px;
+  text-align: center;
 
   margin: 4px 0px;
   padding: 4px 8px;
@@ -18,4 +19,8 @@
   color: white;
   background-color: #f37f4a;
   font-weight: 600;
+}
+
+.Button-leftalign {
+  text-align: start;
 }

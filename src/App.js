@@ -32,16 +32,19 @@ function App() {
           onClick={() => setActivePage(HOME)}
           text={"Home"}
           active={activePage === HOME}
+          leftAlign={true}
         />
         <Button
           onClick={() => setActivePage(ADS)}
           text={"Ads"}
           active={activePage === ADS}
+          leftAlign={true}
         />
         <Button
           onClick={() => setActivePage(MONETIZED_CONTENT)}
           text={"Monetized Content"}
           active={activePage === MONETIZED_CONTENT}
+          leftAlign={true}
         />
         <Separator />
         <WebMonetizationSpoofer />
