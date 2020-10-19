@@ -60,7 +60,6 @@ export default function WebMonetizationSpoofer(props) {
     setWMState(WM_STATE_PENDING);
     dispatchWMStateEvent(WM_EVENT_PENDING);
 
-    generateId(); // Should this only be generated once?
     startWMTimer.current = setTimeout(startWM, 1000);
   };
 
@@ -98,6 +97,7 @@ export default function WebMonetizationSpoofer(props) {
     if (wmStatus === WM_STATE_STARTED || wmStatus === WM_STATE_PENDING) {
       stopWM();
     } else {
+      generateId();
       pendingWM();
     }
   };
