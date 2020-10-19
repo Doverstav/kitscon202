@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/Home";
 import Ads from "./components/Ads/Ads";
