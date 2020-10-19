@@ -4,12 +4,14 @@ import {
   useMonetizationState,
 } from "react-web-monetization";
 
-export default function Home(props) {
+export default function MonetizedContent(props) {
   const monetization = useMonetizationState();
   const counter = useMonetizationCounter();
 
   return (
     <div>
+      <h1>Monetized Content</h1>
+      <p>Monetize playback of your content!</p>
       <p>
         Here is some content that is available for everyone! Inspired by the 100
         + 20 rule (add link to coil blogpost here)
