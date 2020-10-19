@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "./common/Link";
 
 export default function Home(props) {
   return (
@@ -9,6 +10,7 @@ export default function Home(props) {
         this site is trying to do. I could probably bake the "Exclusive
         Content"-demo into this page as well.
       </p>
+      <p>Lokk at this text that is ended with a nice looking lin: <Link href="/" text="Click me!" /></p>
     </div>
   );
 }

@@ -3,13 +3,13 @@ import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/Home";
 import Ads from "./components/Ads/Ads";
-import ExclusiveContent from "./components/ExclusiveContent/ExclusiveContent";
+import MonetizedContent from "./components/MonetizedContent/MonetizedContent";
 import WebMonetizationSpoofer from "./components/WebMonetizationSpoofer/WebMonetizationSpoofer";
 import Button from "./components/common/Button";
 import Separator from "./components/common/Separator";
 
 const ADS = "Ads";
-const EXCLUSIVE_CONTENT = "ExclusiveContent";
+const MONETIZED_CONTENT = "MonetizedContent";
 const HOME = "Home";
 
 function App() {
@@ -19,8 +19,8 @@ function App() {
   useEffect(() => {
     if (activePage === ADS) {
       setDisplayedComponent(<Ads />);
-    } else if (activePage === EXCLUSIVE_CONTENT) {
-      setDisplayedComponent(<ExclusiveContent />);
+    } else if (activePage === MONETIZED_CONTENT) {
+      setDisplayedComponent(<MonetizedContent />);
     } else {
       setDisplayedComponent(<Home />);
     }
@@ -40,9 +40,9 @@ function App() {
           active={activePage === ADS}
         />
         <Button
-          onClick={() => setActivePage(EXCLUSIVE_CONTENT)}
-          text={"Exclusive Content"}
-          active={activePage === EXCLUSIVE_CONTENT}
+          onClick={() => setActivePage(MONETIZED_CONTENT)}
+          text={"Monetized Content"}
+          active={activePage === MONETIZED_CONTENT}
         />
         <Separator />
         <WebMonetizationSpoofer />
