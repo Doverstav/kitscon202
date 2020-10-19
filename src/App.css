@@ -23,6 +23,8 @@
 .content {
   box-sizing: border-box;
 
+  background-color: #f2f2ee; /* Maybe?!?! */
+
   flex-grow: 1;
 
   height: 100%;
