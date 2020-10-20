@@ -12,7 +12,6 @@ const WM_EVENT_PROGRESS = "monetizationprogress";
 
 export default function WebMonetizationSpoofer(props) {
   // User-facing state
-  const [sliderValue, setSliderValue] = useState(10);
   const [isWebMonetized, setIsWebMonetized] = useState(false);
   const [wmStatus, setWMStatus] = useState("");
 
@@ -74,7 +73,6 @@ export default function WebMonetizationSpoofer(props) {
     setWMState(WM_STATE_STARTED);
     dispatchWMStateEvent(WM_EVENT_STARTED);
 
-    // Send one instance of money directly
     dispatchWMProgressEvent();
     wmInterval.current = setInterval(() => {
       console.log(`Sending money! id: ${requestId.current}`);
@@ -109,30 +107,50 @@ export default function WebMonetizationSpoofer(props) {
   }, []);
 
   useEffect(() => {
+    // Set initial state of wmTag
     wmTag.current = document.head.querySelector(
       'meta[name="monetization"]'
     ).content;
     setIsWebMonetized(!!wmTag.current);
-  }, []); // Should run more often than mount/unmount
+
+    // Observe further changes
+    const headObserver = new MutationObserver((mutations) => {
+      const mutatedWMTag = document.head.querySelector(
+        'meta[name="monetization"]'
+      );
+
+      // Stop and start WM intelligently here!!
+      if (mutatedWMTag) {
+        console.log(`New wmTag: ${mutatedWMTag.content}`);
+        wmTag.current = mutatedWMTag.content;
+        setIsWebMonetized(true);
+        // Resume WM if it ws started by user previously, otherwise do nothing
+      } else {
+        console.log("wmTag removed");
+        wmTag.current = undefined;
+        setIsWebMonetized(false);
+        // Stop WM
+      }
+    });
+
+    headObserver.observe(document.head, { childList: true });
+  }, []);
 
   return (
     <div className="WMSpoofer-container">
+      <Button
+        onClick={() => toggleWM()}
+        text={`${
+          wmStatus === WM_STATE_STOPPED ? "Start" : "Stop"
+        } Web Monetization`}
+        active={wmStatus === WM_STATE_STOPPED}
+      />
       <p>Here we can show some status about WM</p>
       <p>
         Web Monetization tag: {isWebMonetized ? "Exists" : "Does not exist"}
       </p>
       <p>Web Monetization is: {wmStatus}</p>
       <p>Maybe show money sent here, with an option to reset!</p>
-      <Button onClick={() => toggleWM()} text={"Click me to start/stop WM"} />
-      <Button text={"I am another button"} />
-      <label>Some slidervalue: {sliderValue}</label>
-      <input
-        type="range"
-        min="0"
-        max="50"
-        value={sliderValue}
-        onChange={(event) => setSliderValue(event.target.value)}
-      />
     </div>
   );
 }
