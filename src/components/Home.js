@@ -27,13 +27,13 @@ export default function Home(props) {
         {(!monetization.state || monetization.state === "stopped") &&
           "Start Web Monetization to unlock exclusive content!"}
         {monetization.state === "pending" && "Loading..."}
-        {monetization.state === "started" && "Very nice! Your content can be found below."}
+        {monetization.state === "started" && "Very nice! Please enjoy your exlusive content."}
       </p>
       {monetization.state === "started" ? (
         <div>
           <img src={BananaGif} alt="BananaGif" />
           <p className="Home-text-small">
-            Gif source is{" "}
+            Gif taken from{" "}
             <Link href="http://gph.is/2o30x8S" text="here" />
           </p>
         </div>
