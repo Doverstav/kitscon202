@@ -12,6 +12,7 @@ const WM_EVENT_PROGRESS = "monetizationprogress";
 
 export default function WebMonetizationSpoofer(props) {
   // User-facing state
+  const [totalMoneySent, setTotalMoneySent] = useState(0);
   const [isWebMonetized, setIsWebMonetized] = useState(false);
   const [wmStatus, setWMStatus] = useState("");
 
@@ -31,6 +32,10 @@ export default function WebMonetizationSpoofer(props) {
         assetScale: 3,
       },
     });
+
+    setTotalMoneySent((totalMoneySent) =>
+      parseFloat((totalMoneySent + 1 / 10 ** 3).toFixed(3))
+    );
 
     document.monetization.dispatchEvent(progressEvent);
   };
@@ -112,7 +117,7 @@ export default function WebMonetizationSpoofer(props) {
       'meta[name="monetization"]'
     ).content;
     setIsWebMonetized(!!wmTag.current);
-
+    
     // Observe further changes
     const headObserver = new MutationObserver((mutations) => {
       const mutatedWMTag = document.head.querySelector(
@@ -150,6 +155,7 @@ export default function WebMonetizationSpoofer(props) {
         Web Monetization tag: {isWebMonetized ? "Exists" : "Does not exist"}
       </p>
       <p>Web Monetization is: {wmStatus}</p>
+      <p>Money sent: {totalMoneySent}</p>
       <p>Maybe show money sent here, with an option to reset!</p>
     </div>
   );
