@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import Link from "../common/Link";
 import SweetTune from "../../res/song.mp3";
+import './MonetizedContent.css'
 
 export default function MonetizedContent(props) {
   let audioPlayer = useRef();
@@ -36,6 +38,7 @@ export default function MonetizedContent(props) {
       <audio controls ref={audioPlayer}>
         <source src={SweetTune} type="audio/mpeg" />
       </audio>
+      <p className="Monetized-Content-text-small">Song is <Link href="https://www.youtube.com/watch?v=FEciLhiKcQA" text="Lonely Troutman II by Will Rosati" /></p>
     </div>
   );
 }
