@@ -7,22 +7,32 @@ export default function MonetizedContent(props) {
   let audioPlayer = useRef();
 
   useEffect(() => {
+    let audioPlayerRef = audioPlayer.current;
     let monetizationTag = document.head.querySelector(
       'meta[name="monetization"]'
     );
 
-    document.head.removeChild(monetizationTag);
-
-    audioPlayer.current.addEventListener("play", () => {
+    const appendMonetizationTag = () => {
       document.head.appendChild(monetizationTag);
-    });
+    };
 
-    audioPlayer.current.addEventListener("pause", () => {
+    const removeMonetizationTag = () => {
       document.head.removeChild(monetizationTag);
-    });
+    };
+
+    removeMonetizationTag(monetizationTag);
+
+    audioPlayerRef.addEventListener("play", appendMonetizationTag);
+
+    audioPlayerRef.addEventListener("pause", removeMonetizationTag);
 
     return () => {
-      document.head.appendChild(monetizationTag);
+      audioPlayerRef.removeEventListener("play", appendMonetizationTag);
+      audioPlayerRef.removeEventListener("pause", removeMonetizationTag);
+
+      if (!document.head.querySelector('meta[name="monetization"]')) {
+        appendMonetizationTag(monetizationTag);
+      }
     };
   }, []);
 
