@@ -109,6 +109,7 @@ export default function WebMonetizationSpoofer(props) {
     console.log("setting WM");
     document.monetization = document.createElement("div");
     setWMState(WM_STATE_STOPPED);
+    dispatchWMStateEvent(WM_EVENT_STOPPED);
   }, []);
 
   useEffect(() => {
@@ -117,7 +118,7 @@ export default function WebMonetizationSpoofer(props) {
       'meta[name="monetization"]'
     ).content;
     setIsWebMonetized(!!wmTag.current);
-    
+
     // Observe further changes
     const headObserver = new MutationObserver((mutations) => {
       const mutatedWMTag = document.head.querySelector(
