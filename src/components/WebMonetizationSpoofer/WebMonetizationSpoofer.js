@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./WMSpoofer.css";
 import Button from "../common/Button";
 
@@ -14,7 +14,7 @@ export default function WebMonetizationSpoofer(props) {
   // User-facing state
   const [totalMoneySent, setTotalMoneySent] = useState(0);
   const [isWebMonetized, setIsWebMonetized] = useState(false);
-  const [wmStatus, setWMStatus] = useState("");
+  const [wmStatus, setWMStatus] = useState(undefined);
 
   // Internal WM state
   const wmTag = useRef();
@@ -22,7 +22,24 @@ export default function WebMonetizationSpoofer(props) {
   const wmInterval = useRef();
   const requestId = useRef();
 
+  const attachWM = () => {
+    console.log("setting WM");
+
+    document.monetization = document.createElement("div");
+    setWMState(WM_STATE_STOPPED);
+    dispatchWMStateEvent(WM_EVENT_STOPPED);
+  };
+
+  const detachWM = () => {
+    console.log("unsetting WM");
+
+    setWMState(undefined);
+    dispatchWMStateEvent(WM_EVENT_STOPPED);
+    delete document.monetization;
+  };
+
   const dispatchWMProgressEvent = () => {
+    console.log("Progress event!");
     const progressEvent = new CustomEvent(WM_EVENT_PROGRESS, {
       detail: {
         requestId: requestId.current,
@@ -41,6 +58,7 @@ export default function WebMonetizationSpoofer(props) {
   };
 
   const dispatchWMStateEvent = (wmEvent) => {
+    console.log(`State event: ${wmEvent}`);
     const stateEvent = new CustomEvent(wmEvent, {
       detail: {
         requestId: requestId.current,
@@ -58,34 +76,33 @@ export default function WebMonetizationSpoofer(props) {
       Math.random().toString(36).substring(2) + Date.now().toString(36);
   };
 
-  const pendingWM = () => {
+  const pendingWM = useCallback(() => {
     console.log("Pending WM");
+
+    const startWM = () => {
+      console.log(`Starting WM`);
+
+      setWMState(WM_STATE_STARTED);
+      dispatchWMStateEvent(WM_EVENT_STARTED);
+
+      dispatchWMProgressEvent();
+      wmInterval.current = setInterval(() => {
+        dispatchWMProgressEvent();
+      }, 1000);
+    };
 
     setWMState(WM_STATE_PENDING);
     dispatchWMStateEvent(WM_EVENT_PENDING);
 
     startWMTimer.current = setTimeout(startWM, 1000);
-  };
+  }, [startWMTimer, wmInterval]);
 
   const setWMState = (state) => {
     setWMStatus(state);
     document.monetization.state = state;
   };
 
-  const startWM = () => {
-    console.log(`Starting WM with id ${requestId.current}`);
-
-    setWMState(WM_STATE_STARTED);
-    dispatchWMStateEvent(WM_EVENT_STARTED);
-
-    dispatchWMProgressEvent();
-    wmInterval.current = setInterval(() => {
-      console.log(`Sending money! id: ${requestId.current}`);
-      dispatchWMProgressEvent();
-    }, 1000);
-  };
-
-  const stopWM = () => {
+  const stopWM = useCallback(() => {
     console.log("Stopping WM");
 
     setWMState(WM_STATE_STOPPED);
@@ -94,62 +111,74 @@ export default function WebMonetizationSpoofer(props) {
     // Clear timer & interval
     clearTimeout(startWMTimer.current);
     clearInterval(wmInterval.current);
-  };
+  }, [startWMTimer, wmInterval]);
 
   const toggleWM = () => {
-    if (wmStatus === WM_STATE_STARTED || wmStatus === WM_STATE_PENDING) {
+    if (wmStatus) {
       stopWM();
+      detachWM();
     } else {
-      generateId();
-      pendingWM();
+      attachWM();
+      if (isWebMonetized) {
+        pendingWM();
+      }
     }
   };
 
+  const handleMutatedWMTag = useCallback(() => {
+    const mutatedWMTag = document.head.querySelector(
+      'meta[name="monetization"]'
+    );
+
+    if (mutatedWMTag) {
+      console.log(`New wmTag: ${mutatedWMTag.content}`);
+      wmTag.current = mutatedWMTag.content;
+      setIsWebMonetized(true);
+
+      if (wmStatus !== undefined) {
+        pendingWM();
+      }
+    } else {
+      console.log("wmTag removed");
+      wmTag.current = undefined;
+      setIsWebMonetized(false);
+      
+      if(wmStatus !== undefined) {
+        stopWM();
+      }
+    }
+  }, [pendingWM, stopWM, wmStatus]);
+
   useEffect(() => {
-    console.log("setting WM");
-    document.monetization = document.createElement("div");
-    setWMState(WM_STATE_STOPPED);
-    dispatchWMStateEvent(WM_EVENT_STOPPED);
+    generateId();
+
+    // Set initial state of wmTag
+    const currentWMTag = document.head.querySelector(
+      'meta[name="monetization"]'
+    );
+    wmTag.current = currentWMTag ? currentWMTag.content : undefined;
+    setIsWebMonetized(!!wmTag.current);
   }, []);
 
   useEffect(() => {
-    // Set initial state of wmTag
-    wmTag.current = document.head.querySelector(
-      'meta[name="monetization"]'
-    ).content;
-    setIsWebMonetized(!!wmTag.current);
-
     // Observe further changes
     const headObserver = new MutationObserver((mutations) => {
-      const mutatedWMTag = document.head.querySelector(
-        'meta[name="monetization"]'
-      );
-
-      // Stop and start WM intelligently here!!
-      if (mutatedWMTag) {
-        console.log(`New wmTag: ${mutatedWMTag.content}`);
-        wmTag.current = mutatedWMTag.content;
-        setIsWebMonetized(true);
-        // Resume WM if it ws started by user previously, otherwise do nothing
-      } else {
-        console.log("wmTag removed");
-        wmTag.current = undefined;
-        setIsWebMonetized(false);
-        // Stop WM
-      }
+      handleMutatedWMTag();
     });
 
     headObserver.observe(document.head, { childList: true });
-  }, []);
+
+    return () => {
+      headObserver.disconnect()
+    }
+  }, [handleMutatedWMTag])
 
   return (
     <div className="WMSpoofer-container">
       <Button
         onClick={() => toggleWM()}
-        text={`${
-          wmStatus === WM_STATE_STOPPED ? "Start" : "Stop"
-        } Web Monetization`}
-        active={wmStatus === WM_STATE_STOPPED}
+        text={`${!wmStatus ? "Spoof" : "Unspoof"} Web Monetization`}
+        active={!wmStatus}
       />
       <p>Here we can show some status about WM</p>
       <p>
