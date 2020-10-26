@@ -23,16 +23,13 @@ export default function MonetizedContent(props) {
     removeMonetizationTag(monetizationTag);
 
     audioPlayerRef.addEventListener("play", appendMonetizationTag);
-
     audioPlayerRef.addEventListener("pause", removeMonetizationTag);
 
     return () => {
       audioPlayerRef.removeEventListener("play", appendMonetizationTag);
       audioPlayerRef.removeEventListener("pause", removeMonetizationTag);
 
-      if (!document.head.querySelector('meta[name="monetization"]')) {
-        appendMonetizationTag(monetizationTag);
-      }
+      appendMonetizationTag(monetizationTag);
     };
   }, []);
 

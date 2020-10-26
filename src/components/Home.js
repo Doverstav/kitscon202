@@ -1,14 +1,55 @@
-import React from "react";
-import { useMonetizationState } from "react-web-monetization";
+import React, { useEffect, useState } from "react";
+import {
+  WM_EVENT_PENDING,
+  WM_STATE_STOPPED,
+  WM_EVENT_STARTED,
+  WM_EVENT_STOPPED,
+  WM_STATE_PENDING,
+  WM_STATE_STARTED,
+} from "./WebMonetizationSpoofer/WebMonetizationSpoofer";
 
 import Link from "./common/Link";
 import Separator from "./common/Separator";
 
 import BananaGif from "../res/giphy.gif";
-import "./Home.css"
+import "./Home.css";
 
 export default function Home(props) {
-  const monetization = useMonetizationState();
+  const [monetizationState, setMonetizationState] = useState(undefined);
+
+  useEffect(() => {
+    if (props.spoofState) {
+      // Get current monetization state
+      setMonetizationState(document.monetization.state);
+
+      let monetizationObject = document.monetization;
+
+      // Set up listeners to respond to state changes
+      const setStateToStarted = () => setMonetizationState(WM_STATE_STARTED);
+      const setStateToPending = () => setMonetizationState(WM_STATE_PENDING);
+      const setStateToStopped = () => setMonetizationState(WM_STATE_STOPPED);
+
+      monetizationObject.addEventListener(WM_EVENT_STARTED, setStateToStarted);
+      monetizationObject.addEventListener(WM_EVENT_PENDING, setStateToPending);
+      monetizationObject.addEventListener(WM_EVENT_STOPPED, setStateToStopped);
+
+      return () => {
+        // Remove listeners when unmounting
+        monetizationObject.removeEventListener(
+          WM_EVENT_STARTED,
+          setStateToStarted
+        );
+        monetizationObject.removeEventListener(
+          WM_EVENT_PENDING,
+          setStateToPending
+        );
+        monetizationObject.removeEventListener(
+          WM_EVENT_STOPPED,
+          setStateToStopped
+        );
+      };
+    }
+  }, [props.spoofState]);
 
   return (
     <div>
@@ -24,17 +65,17 @@ export default function Home(props) {
       </p>
       <Separator />
       <p>
-        {(!monetization.state || monetization.state === "stopped") &&
+        {(!monetizationState || monetizationState === WM_STATE_STOPPED) &&
           "Start Web Monetization to unlock exclusive content!"}
-        {monetization.state === "pending" && "Loading..."}
-        {monetization.state === "started" && "Very nice! Please enjoy your exlusive content."}
+        {monetizationState === WM_STATE_PENDING && "Loading..."}
+        {monetizationState === WM_STATE_STARTED &&
+          "Very nice! Please enjoy your exlusive content."}
       </p>
-      {monetization.state === "started" ? (
+      {monetizationState === "started" ? (
         <div>
           <img src={BananaGif} alt="BananaGif" />
           <p className="Home-text-small">
-            Gif taken from{" "}
-            <Link href="http://gph.is/2o30x8S" text="here" />
+            Gif taken from <Link href="http://gph.is/2o30x8S" text="here" />
           </p>
         </div>
       ) : null}

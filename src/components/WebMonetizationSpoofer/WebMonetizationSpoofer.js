@@ -2,18 +2,20 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./WMSpoofer.css";
 import Button from "../common/Button";
 
-const WM_STATE_STOPPED = "stopped";
-const WM_STATE_PENDING = "pending";
-const WM_STATE_STARTED = "started";
-const WM_EVENT_STOPPED = "monetizationstop";
-const WM_EVENT_STARTED = "monetizationstart";
-const WM_EVENT_PENDING = "monetizationpending";
-const WM_EVENT_PROGRESS = "monetizationprogress";
+export const WM_STATE_STOPPED = "stopped";
+export const WM_STATE_PENDING = "pending";
+export const WM_STATE_STARTED = "started";
+export const WM_EVENT_STOPPED = "monetizationstop";
+export const WM_EVENT_STARTED = "monetizationstart";
+export const WM_EVENT_PENDING = "monetizationpending";
+export const WM_EVENT_PROGRESS = "monetizationprogress";
 
 export default function WebMonetizationSpoofer(props) {
   // User-facing state
   const [totalMoneySent, setTotalMoneySent] = useState(0);
   const [isWebMonetized, setIsWebMonetized] = useState(false);
+  // Is undefined when we are not spoofing Web Monetization,
+  // otherwise is one of the three state constants defined above
   const [wmStatus, setWMStatus] = useState(undefined);
 
   // Internal WM state
@@ -23,23 +25,18 @@ export default function WebMonetizationSpoofer(props) {
   const requestId = useRef();
 
   const attachWM = () => {
-    console.log("setting WM");
-
     document.monetization = document.createElement("div");
     setWMState(WM_STATE_STOPPED);
     dispatchWMStateEvent(WM_EVENT_STOPPED);
   };
 
   const detachWM = () => {
-    console.log("unsetting WM");
-
     setWMState(undefined);
     dispatchWMStateEvent(WM_EVENT_STOPPED);
     delete document.monetization;
   };
 
   const dispatchWMProgressEvent = () => {
-    console.log("Progress event!");
     const progressEvent = new CustomEvent(WM_EVENT_PROGRESS, {
       detail: {
         requestId: requestId.current,
@@ -58,7 +55,6 @@ export default function WebMonetizationSpoofer(props) {
   };
 
   const dispatchWMStateEvent = (wmEvent) => {
-    console.log(`State event: ${wmEvent}`);
     const stateEvent = new CustomEvent(wmEvent, {
       detail: {
         requestId: requestId.current,
@@ -71,17 +67,12 @@ export default function WebMonetizationSpoofer(props) {
   };
 
   const generateId = () => {
-    console.log("Generating id");
     requestId.current =
       Math.random().toString(36).substring(2) + Date.now().toString(36);
   };
 
   const pendingWM = useCallback(() => {
-    console.log("Pending WM");
-
     const startWM = () => {
-      console.log(`Starting WM`);
-
       setWMState(WM_STATE_STARTED);
       dispatchWMStateEvent(WM_EVENT_STARTED);
 
@@ -103,8 +94,6 @@ export default function WebMonetizationSpoofer(props) {
   };
 
   const stopWM = useCallback(() => {
-    console.log("Stopping WM");
-
     setWMState(WM_STATE_STOPPED);
     dispatchWMStateEvent(WM_EVENT_STOPPED);
 
@@ -116,11 +105,14 @@ export default function WebMonetizationSpoofer(props) {
   const toggleWM = () => {
     if (wmStatus) {
       stopWM();
+      props.setSpoofState(false);
       detachWM();
     } else {
       attachWM();
+      props.setSpoofState(true);
       if (isWebMonetized) {
-        pendingWM();
+        // Give components some time to update kekW
+        setTimeout(() => pendingWM(), 100);
       }
     }
   };
@@ -131,19 +123,21 @@ export default function WebMonetizationSpoofer(props) {
     );
 
     if (mutatedWMTag) {
-      console.log(`New wmTag: ${mutatedWMTag.content}`);
       wmTag.current = mutatedWMTag.content;
       setIsWebMonetized(true);
 
-      if (wmStatus !== undefined) {
+      // Only start if we are currently spoofing and are stopped
+      // If we are not spoofing, things will crash when starting
+      // If we are not stopped, we will fire multiple progression events
+      // which will send money quicker than intended
+      if (wmStatus === WM_STATE_STOPPED) {
         pendingWM();
       }
     } else {
-      console.log("wmTag removed");
       wmTag.current = undefined;
       setIsWebMonetized(false);
-      
-      if(wmStatus !== undefined) {
+
+      if (wmStatus !== undefined) {
         stopWM();
       }
     }
@@ -169,9 +163,9 @@ export default function WebMonetizationSpoofer(props) {
     headObserver.observe(document.head, { childList: true });
 
     return () => {
-      headObserver.disconnect()
-    }
-  }, [handleMutatedWMTag])
+      headObserver.disconnect();
+    };
+  }, [handleMutatedWMTag]);
 
   return (
     <div className="WMSpoofer-container">

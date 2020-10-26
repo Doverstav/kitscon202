@@ -12,18 +12,21 @@ const MONETIZED_CONTENT = "MonetizedContent";
 const HOME = "Home";
 
 function App() {
+  const [isSpoofing, setIsSpoofing] = useState(false);
   const [activePage, setActivePage] = useState(HOME);
-  const [displayedComponent, setDisplayedComponent] = useState(<Home />);
+  const [displayedComponent, setDisplayedComponent] = useState(
+    <Home spoofState={isSpoofing} />
+  );
 
   useEffect(() => {
     if (activePage === ADS) {
-      setDisplayedComponent(<Ads />);
+      setDisplayedComponent(<Ads spoofState={isSpoofing} />);
     } else if (activePage === MONETIZED_CONTENT) {
-      setDisplayedComponent(<MonetizedContent />);
+      setDisplayedComponent(<MonetizedContent spoofState={isSpoofing} />);
     } else {
-      setDisplayedComponent(<Home />);
+      setDisplayedComponent(<Home spoofState={isSpoofing} />);
     }
-  }, [activePage]);
+  }, [activePage, isSpoofing]);
 
   return (
     <div className="App">
@@ -47,7 +50,9 @@ function App() {
           leftAlign={true}
         />
         <Separator />
-        <WebMonetizationSpoofer />
+        <WebMonetizationSpoofer
+          setSpoofState={(spoofState) => setIsSpoofing(spoofState)}
+        />
       </div>
       <div className="content">
         <div className="content-inner">{displayedComponent}</div>
