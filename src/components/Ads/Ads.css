@@ -1,0 +1,24 @@
+.Ads-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.Ads-ad-side {
+  height: 100%;
+  display: block;
+}
+
+.Ads-content {
+  padding: 16px;
+}
+
+.Ads-ad-banner {
+  display: block;
+  max-width: 100%;
+}
+
+.Ads-ad-box {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
