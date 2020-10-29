@@ -171,7 +171,7 @@ export default function WebMonetizationSpoofer(props) {
     <div className="WMSpoofer-container">
       <Button
         onClick={() => toggleWM()}
-        text={`${!wmStatus ? "Spoof" : "Unspoof"} Web Monetization`}
+        text={`${!wmStatus ? "Start" : "Stop"} Web Monetization`}
         active={!wmStatus}
       />
       <p>Here we can show some status about WM</p>
