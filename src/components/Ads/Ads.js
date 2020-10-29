@@ -14,7 +14,8 @@ import Ad250x300 from "../../res/ad250x300.png";
 import Ad728x90 from "../../res/ad728x90.png";
 
 export default function Home(props) {
-  const [monetizationState, setMonetizationState] = useState(undefined);
+  // Init this to WM_STATE_STARTED to avoid the "ads" flashing when navigating to page
+  const [monetizationState, setMonetizationState] = useState(WM_STATE_STARTED);
 
   useEffect(() => {
     if (props.spoofState) {
@@ -54,22 +55,38 @@ export default function Home(props) {
 
   return (
     <div className="Ads-container">
-      <img className="Ads-ad-side" src={Ad160x600} alt="" />
+      {monetizationState !== WM_STATE_STARTED ? (
+        <img className="Ads-ad-side" src={Ad160x600} alt="" />
+      ) : null}
       <div className="Ads-content">
-        <img className="Ads-ad-banner" src={Ad728x90} alt="" />
-        {monetizationState}
-        <h1>Removable ads</h1>
+        <h1>Double dipping in revenue streams</h1>
+        {monetizationState !== WM_STATE_STARTED ? (
+          <img className="Ads-ad-banner" src={Ad728x90} alt="" />
+        ) : null}
         <p>
-          Allow the user to choose! Either they can pay you directly using Web
-          Monetization, or you can serve them some ads if they do not use it.
+          You don't have to put all your eggs in the Web Monetization-basket! It
+          is easy to combine a more traditional, ad-driven revenue stream with
+          Web Monetization. A monetized user won't have to their page bogged
+          down with advertisements, and a non-paying user will instead pay for
+          themselves by viewing your tastefully inserted ads.
         </p>
-        <img className="Ads-ad-box" src={Ad250x300} alt="" />
-        <p>It's getting out of hand with all these ads!!</p>
-        <img className="Ads-ad-box" src={Ad250x300} alt="" />
-        <p>Toogle Web monetization on and off to see the difference.</p>
-        <img className="Ads-ad-banner" src={Ad728x90} alt="" />
+        {monetizationState !== WM_STATE_STARTED ? (
+          <img className="Ads-ad-box" src={Ad250x300} alt="" />
+        ) : null}
+        <p>
+          To remove the ads, turn on Web Monetization. After a bit a second,
+          when the Web Monetization status has gone from pending to started, the
+          ads will disappear! To bring them back, simply stop the Web
+          Monetization again, and the ads will pop back in! So try it, and see
+          the difference it can make.
+        </p>
+        {monetizationState !== WM_STATE_STARTED ? (
+          <img className="Ads-ad-banner" src={Ad728x90} alt="" />
+        ) : null}
       </div>
-      <img className="Ads-ad-side" src={Ad160x600} alt="" />
+      {monetizationState !== WM_STATE_STARTED ? (
+        <img className="Ads-ad-side" src={Ad160x600} alt="" />
+      ) : null}
     </div>
   );
 }
