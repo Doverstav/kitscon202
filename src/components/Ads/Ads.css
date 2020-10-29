@@ -5,6 +5,7 @@
 
 .Ads-ad-side {
   height: 100%;
+  min-height: 600px;
   display: block;
 }
 
