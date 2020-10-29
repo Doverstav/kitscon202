@@ -48,6 +48,8 @@ export default function Home(props) {
           setStateToStopped
         );
       };
+    } else {
+      setMonetizationState(undefined);
     }
   }, [props.spoofState]);
 
