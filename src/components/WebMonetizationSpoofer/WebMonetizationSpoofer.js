@@ -27,6 +27,7 @@ export default function WebMonetizationSpoofer(props) {
   // DOM refs
   const moneyCounter = useRef();
   const WMStatusElement = useRef();
+  const WMTagElement = useRef();
 
   const attachWM = () => {
     document.monetization = document.createElement("div");
@@ -183,6 +184,14 @@ export default function WebMonetizationSpoofer(props) {
     }
   }, [wmStatus]);
 
+  useEffect(() => {
+    if (isWebMonetized) {
+      WMTagElement.current.style.borderLeftColor = "green";
+    } else {
+      WMTagElement.current.style.borderLeftColor = "red";
+    }
+  }, [isWebMonetized]);
+
   return (
     <div className="WMSpoofer-container">
       <Button
@@ -191,10 +200,10 @@ export default function WebMonetizationSpoofer(props) {
         active={!wmStatus}
       />
       <p>Here we can show some status about WM</p>
-      <p>
+      <p className="WMSpoofer-border" ref={WMTagElement}>
         Web Monetization tag: {isWebMonetized ? "Exists" : "Does not exist"}
       </p>
-      <p className="WMSpoofer-border WMSpoofer-status" ref={WMStatusElement}>
+      <p className="WMSpoofer-border" ref={WMStatusElement}>
         Web Monetization is: {wmStatus ? wmStatus : "undefined"}
       </p>
       <p>

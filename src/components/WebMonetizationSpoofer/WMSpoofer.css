@@ -3,10 +3,8 @@
     flex-direction: column;
 }
 
-.WMSpoofer-status {
-    padding-left: 8px;
-}
-
 .WMSpoofer-border {
     border-left: 8px solid grey;
+
+    padding-left: 8px;
 }
