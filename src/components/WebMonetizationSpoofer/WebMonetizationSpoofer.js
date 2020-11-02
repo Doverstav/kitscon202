@@ -24,6 +24,10 @@ export default function WebMonetizationSpoofer(props) {
   const wmInterval = useRef();
   const requestId = useRef();
 
+  // DOM refs
+  const moneyCounter = useRef();
+  const WMStatusElement = useRef();
+
   const attachWM = () => {
     document.monetization = document.createElement("div");
     setWMState(WM_STATE_STOPPED);
@@ -167,6 +171,18 @@ export default function WebMonetizationSpoofer(props) {
     };
   }, [handleMutatedWMTag]);
 
+  useEffect(() => {
+    if (wmStatus === WM_STATE_STOPPED) {
+      WMStatusElement.current.style.borderLeftColor = "red";
+    } else if (wmStatus === WM_STATE_PENDING) {
+      WMStatusElement.current.style.borderLeftColor = "yellow";
+    } else if (wmStatus === WM_STATE_STARTED) {
+      WMStatusElement.current.style.borderLeftColor = "green";
+    } else {
+      WMStatusElement.current.style.borderLeftColor = "gray";
+    }
+  }, [wmStatus]);
+
   return (
     <div className="WMSpoofer-container">
       <Button
@@ -178,8 +194,12 @@ export default function WebMonetizationSpoofer(props) {
       <p>
         Web Monetization tag: {isWebMonetized ? "Exists" : "Does not exist"}
       </p>
-      <p>Web Monetization is: {wmStatus}</p>
-      <p>Money sent: {totalMoneySent}</p>
+      <p className="WMSpoofer-border WMSpoofer-status" ref={WMStatusElement}>
+        Web Monetization is: {wmStatus ? wmStatus : "undefined"}
+      </p>
+      <p>
+        Money sent: <span ref={moneyCounter}>{totalMoneySent}</span>
+      </p>
       <p>Maybe show money sent here, with an option to reset!</p>
     </div>
   );
