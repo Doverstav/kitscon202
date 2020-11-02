@@ -20,14 +20,12 @@ export default function MonetizedContent(props) {
   const previousMonetizationState = useRef();
 
   const appendMonetizationTag = useCallback(() => {
-    console.log(monetizationTag);
     if (monetizationTag) {
       document.head.appendChild(monetizationTag);
     }
   }, [monetizationTag]);
 
   const removeMonetizationTag = useCallback(() => {
-    console.log(monetizationTag);
     if (monetizationTag) {
       document.head.removeChild(monetizationTag);
     }
@@ -70,7 +68,6 @@ export default function MonetizedContent(props) {
   }, [props.spoofState]);
 
   useEffect(() => {
-    console.log("Main effect");
     let audioPlayerRef = audioPlayer.current;
 
     setMonetizationTag(
