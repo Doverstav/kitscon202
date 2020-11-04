@@ -6,6 +6,12 @@
   justify-content: center;
 }
 
+.dollar-sign-image {
+  display: block;
+  max-width: 50%;
+  margin: auto;
+}
+
 .sidebar {
   box-sizing: border-box;
 
@@ -15,7 +21,6 @@
   background-color: #7ac4bb;
 
   padding: 16px;
-  padding-top: 0;
 
   border-right: 1px solid black;
 }

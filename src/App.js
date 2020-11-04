@@ -6,6 +6,7 @@ import MonetizedContent from "./components/MonetizedContent/MonetizedContent";
 import WebMonetizationSpoofer from "./components/WebMonetizationSpoofer/WebMonetizationSpoofer";
 import Button from "./components/common/Button";
 import Separator from "./components/common/Separator";
+import dollarSign from "./res/heavy-dollar-sign.png"
 
 const ADS = "Ads";
 const MONETIZED_CONTENT = "MonetizedContent";
@@ -31,6 +32,7 @@ function App() {
   return (
     <div className="App">
       <div className="sidebar">
+        <img className="dollar-sign-image" src={dollarSign} alt="Dollar sign emoji" />
         <h1 className="sidebar-header">Navigation</h1>
         <Button
           onClick={() => setActivePage(HOME)}
