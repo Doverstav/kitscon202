@@ -15,8 +15,13 @@
   background-color: #7ac4bb;
 
   padding: 16px;
+  padding-top: 0;
 
   border-right: 1px solid black;
+}
+
+.sidebar-header {
+  text-align: center;
 }
 
 .content {

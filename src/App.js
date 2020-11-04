@@ -31,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <div className="sidebar">
+        <h1 className="sidebar-header">Navigation</h1>
         <Button
           onClick={() => setActivePage(HOME)}
           text={"Home"}
@@ -50,6 +51,7 @@ function App() {
           leftAlign={true}
         />
         <Separator />
+        <h1 className="sidebar-header">Dashboard</h1>
         <WebMonetizationSpoofer
           setSpoofState={(spoofState) => setIsSpoofing(spoofState)}
         />
