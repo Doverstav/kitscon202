@@ -102,7 +102,12 @@ export default function MonetizedContent(props) {
       // Reload when adding web monetization to add audio track
       audioPlayer.current.load();
     }
-  }, [monetizationState, appendMonetizationTag, removeMonetizationTag, monetizationTag]);
+  }, [
+    monetizationState,
+    appendMonetizationTag,
+    removeMonetizationTag,
+    monetizationTag,
+  ]);
 
   useEffect(() => {
     previousMonetizationState.current = monetizationState;
@@ -111,17 +116,18 @@ export default function MonetizedContent(props) {
   return (
     <div>
       <h1>Monetized Content</h1>
-      <p>
+      <p style={{ fontWeight: "500" }}>
         For some services, it may only make sense for the user to pay while they
         are consuming content. Examples of such services are Spotify and
         Youtube. So instead of the user streaming payments by visiting the site,
         they are instead streaming payments for every second of content enjoyed.
       </p>
+      <h2>Pay as you listen</h2>
       <p>
         Viewing this page with Web Monetization enabled will allow you to play a
-        song. Notice that while the sing is not playing, Web Monetization is
+        song. Notice that while the song is not playing, Web Monetization is
         stopped, and the website does not have a Web Monetization tag. When
-        clicking play, a tag is inserted and Web Monetization start
+        clicking play, a tag is inserted and Web Monetization starts
         automatically, sending money while the song is playing. Pausing removes
         the tag again and Web Monetization automatically stops.
       </p>

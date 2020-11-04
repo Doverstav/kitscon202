@@ -56,13 +56,14 @@ export default function Home(props) {
   return (
     <div>
       <h1>Web Monetization Demo</h1>
-      <p>
+      <p style={{ fontWeight: "500" }}>
         <Link href="https://webmonetization.org/" text="Web Monetization" /> is
         a browser API that allows the creation of a payment stream from the user
         agent to a website. This website contains simple examples of how Web
         Monetization can be used, and tries to show that it is rather simple to
         create a Web Monetized website.
       </p>
+      <h2>A proposed standard</h2>
       <p>
         As Web Monetization is a proposed standard, it is not part of any
         browser today. Instead, users must have a Web Monetization provider, of
@@ -72,6 +73,7 @@ export default function Home(props) {
         Monetization provider. This provider can also easily be removed to
         easily compare between monetized and non-monetized versions.
       </p>
+      <h2>The 100+20 rule</h2>
       <p>
         This startpage demonstrates the so called{" "}
         <Link
@@ -100,13 +102,16 @@ export default function Home(props) {
           "Very nice! Please enjoy your exlusive content."}
       </p>
       {monetizationState === "started" ? (
-        <p>
-          So this is the exlusive content you were promised! It's not a lot, but
-          here it is. I can't give you much, but I can give you this advice.
-          Explore the other pages on this site via the navigation the your left
-          to see more examples! And visit the "About" page for more details on
-          how this all works.
-        </p>
+        <>
+          <h2>Exclusive content</h2>
+          <p>
+            So this is the exlusive content you were promised! It's not a lot,
+            but here it is. I can't give you much, but I can give you this
+            advice. Explore the other pages on this site via the navigation the
+            your left to see more examples! And visit the "About" page for more
+            details on how this all works.
+          </p>
+        </>
       ) : null}
     </div>
   );

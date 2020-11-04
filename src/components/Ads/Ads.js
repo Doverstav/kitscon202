@@ -63,7 +63,7 @@ export default function Home(props) {
         {monetizationState !== WM_STATE_STARTED ? (
           <img className="Ads-ad-banner" src={Ad728x90} alt="" />
         ) : null}
-        <p>
+        <p style={{ fontWeight: "500" }}>
           You don't have to put all your eggs in the Web Monetization-basket! It
           is easy to combine a more traditional, ad-driven revenue stream with
           Web Monetization. A monetized user won't have to their page bogged
@@ -73,12 +73,12 @@ export default function Home(props) {
         {monetizationState !== WM_STATE_STARTED ? (
           <img className="Ads-ad-box" src={Ad250x300} alt="" />
         ) : null}
+        <h2>Get the ad free experience</h2>
         <p>
-          To remove the ads, turn on Web Monetization. After a bit a second,
-          when the Web Monetization status has gone from pending to started, the
-          ads will disappear! To bring them back, simply stop the Web
-          Monetization again, and the ads will pop back in! So try it, and see
-          the difference it can make.
+          To remove the ads, turn on Web Monetization. After a second, when the
+          Web Monetization status has gone from pending to started, the ads will
+          disappear! To bring them back, simply stop the Web Monetization again,
+          and the ads will pop back in!
         </p>
         {monetizationState !== WM_STATE_STARTED ? (
           <img className="Ads-ad-banner" src={Ad728x90} alt="" />
