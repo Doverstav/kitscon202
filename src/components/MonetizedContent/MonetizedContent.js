@@ -114,7 +114,7 @@ export default function MonetizedContent(props) {
   });
 
   return (
-    <div>
+    <div className="Monetized-Content-container">
       <h1>Monetized Content</h1>
       <p style={{ fontWeight: "500" }}>
         For some services, it may only make sense for the user to pay while they

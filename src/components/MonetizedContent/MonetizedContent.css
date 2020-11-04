@@ -1,3 +1,8 @@
+.Monetized-Content-container {
+  max-width: 500px;
+  margin: auto;
+}
+
 .Monetized-Content-text-small {
   font-size: 0.8em;
 }

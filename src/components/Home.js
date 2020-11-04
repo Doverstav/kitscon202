@@ -11,7 +11,6 @@ import {
 import Link from "./common/Link";
 import Separator from "./common/Separator";
 
-import BananaGif from "../res/giphy.gif";
 import "./Home.css";
 
 export default function Home(props) {
@@ -54,7 +53,7 @@ export default function Home(props) {
   }, [props.spoofState]);
 
   return (
-    <div>
+    <div className="Home-container">
       <h1>Web Monetization Demo</h1>
       <p style={{ fontWeight: "500" }}>
         <Link href="https://webmonetization.org/" text="Web Monetization" /> is
