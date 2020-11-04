@@ -199,13 +199,15 @@ export default function WebMonetizationSpoofer(props) {
         text={`${!wmStatus ? "Start" : "Stop"} Web Monetization`}
         active={!wmStatus}
       />
-      <p className="WMSpoofer-border" ref={WMTagElement}>
-        Web Monetization tag: {isWebMonetized ? "Exists" : "Does not exist"}
+      <p className="WMSpoofer-status-container WMSpoofer-border" ref={WMTagElement}>
+        <span>Web Monetization tag:</span>{" "}
+        <span>{isWebMonetized ? "Exists" : "Does not exist"}</span>
       </p>
-      <p className="WMSpoofer-border" ref={WMStatusElement}>
-        Web Monetization is: {wmStatus ? wmStatus : "undefined"}
+      <p className="WMSpoofer-status-container WMSpoofer-border" ref={WMStatusElement}>
+        <span>Web Monetization is:</span>{" "}
+        <span>{wmStatus ? wmStatus : "undefined"}</span>
       </p>
-      <p>
+      <p className="WMSpoofer-status-container">
         Money sent: <span ref={moneyCounter}>{totalMoneySent}</span>
       </p>
     </div>
