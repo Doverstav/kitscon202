@@ -11,6 +11,7 @@ import {
   WM_STATE_STOPPED,
 } from "../WebMonetizationSpoofer/WebMonetizationSpoofer";
 import Separator from "../common/Separator";
+import Preamble from "../common/Preamble";
 
 export default function MonetizedContent(props) {
   const audioPlayer = useRef();
@@ -116,12 +117,12 @@ export default function MonetizedContent(props) {
   return (
     <div className="Monetized-Content-container">
       <h1>Monetized Content</h1>
-      <p style={{ fontWeight: "500" }}>
+      <Preamble>
         For some services, it may only make sense for the user to pay while they
         are consuming content. Examples of such services are Spotify and
         Youtube. So instead of the user streaming payments by visiting the site,
         they are instead streaming payments for every second of content enjoyed.
-      </p>
+      </Preamble>
       <h2>Pay as you listen</h2>
       <p>
         Viewing this page with Web Monetization enabled will allow you to play a
@@ -140,9 +141,9 @@ export default function MonetizedContent(props) {
       {monetizationState !== undefined ? (
         <p className="Monetized-Content-text-small">
           Song is{" "}
-          <Link
-            href="https://www.youtube.com/watch?v=FEciLhiKcQA"
-          >Lonely Troutman II by Will Rosati</Link>
+          <Link href="https://www.youtube.com/watch?v=FEciLhiKcQA">
+            Lonely Troutman II by Will Rosati
+          </Link>
         </p>
       ) : null}
     </div>

@@ -12,6 +12,7 @@ import "./Ads.css";
 import Ad160x600 from "../../res/ad160x600.png";
 import Ad250x300 from "../../res/ad250x300.png";
 import Ad728x90 from "../../res/ad728x90.png";
+import Preamble from "../common/Preamble";
 
 export default function Home(props) {
   // Init this to WM_STATE_STARTED to avoid the "ads" flashing when navigating to page
@@ -63,13 +64,13 @@ export default function Home(props) {
         {monetizationState !== WM_STATE_STARTED ? (
           <img className="Ads-ad-banner" src={Ad728x90} alt="" />
         ) : null}
-        <p style={{ fontWeight: "500" }}>
+        <Preamble>
           You don't have to put all your eggs in the Web Monetization-basket! It
           is easy to combine a more traditional, ad-driven revenue stream with
           Web Monetization. A monetized user won't have to their page bogged
           down with advertisements, and a non-paying user will instead pay for
           themselves by viewing your tastefully inserted ads.
-        </p>
+        </Preamble>
         {monetizationState !== WM_STATE_STARTED ? (
           <img className="Ads-ad-box" src={Ad250x300} alt="" />
         ) : null}

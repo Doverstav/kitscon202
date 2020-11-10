@@ -12,6 +12,7 @@ import Link from "./common/Link";
 import Separator from "./common/Separator";
 
 import "./Home.css";
+import Preamble from "./common/Preamble";
 
 export default function Home(props) {
   const [monetizationState, setMonetizationState] = useState(undefined);
@@ -55,13 +56,13 @@ export default function Home(props) {
   return (
     <div className="Home-container">
       <h1>Web Monetization Demo</h1>
-      <p style={{ fontWeight: "500" }}>
+      <Preamble>
         <Link href="https://webmonetization.org/">Web Monetization</Link> is a
         browser API that allows the creation of a payment stream from the user
         agent to a website. This website contains simple examples of how Web
         Monetization can be used, and tries to show that it is rather simple to
         create a Web Monetized website.
-      </p>
+      </Preamble>
       <h2>A proposed standard</h2>
       <p>
         As Web Monetization is a proposed standard, it is not part of any
