@@ -59,7 +59,7 @@ function App() {
         />
       </div>
       <div className="content">
-        <div className="content-inner">{displayedComponent}</div>
+        {displayedComponent}
       </div>
     </div>
   );

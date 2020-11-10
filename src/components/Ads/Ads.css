@@ -13,10 +13,8 @@
 .Ads-content {
   max-width: 500px;
 
-  margin: auto;
-
-  padding: 16px;
-
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .Ads-ad-banner {
