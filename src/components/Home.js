@@ -56,8 +56,8 @@ export default function Home(props) {
     <div className="Home-container">
       <h1>Web Monetization Demo</h1>
       <p style={{ fontWeight: "500" }}>
-        <Link href="https://webmonetization.org/" text="Web Monetization" /> is
-        a browser API that allows the creation of a payment stream from the user
+        <Link href="https://webmonetization.org/">Web Monetization</Link> is a
+        browser API that allows the creation of a payment stream from the user
         agent to a website. This website contains simple examples of how Web
         Monetization can be used, and tries to show that it is rather simple to
         create a Web Monetized website.
@@ -67,7 +67,7 @@ export default function Home(props) {
         As Web Monetization is a proposed standard, it is not part of any
         browser today. Instead, users must have a Web Monetization provider, of
         which there today exists only one,{" "}
-        <Link href="https://coil.com/" text="Coil" />. So, in order to make this
+        <Link href="https://coil.com/">Coil</Link>. So, in order to make this
         website usable by anyone, it allows the user to inject a fake Web
         Monetization provider. This provider can also easily be removed to
         easily compare between monetized and non-monetized versions.
@@ -75,10 +75,9 @@ export default function Home(props) {
       <h2>The 100+20 rule</h2>
       <p>
         This startpage demonstrates the so called{" "}
-        <Link
-          href="https://coil.com/p/coil/The-100-20-Rule-for-Premium-Content/3l1ALJ3M6"
-          text="100+20 rule"
-        />{" "}
+        <Link href="https://coil.com/p/coil/The-100-20-Rule-for-Premium-Content/3l1ALJ3M6">
+          100+20 rule
+        </Link>{" "}
         for written content, where the free content is a complete article, but
         monetized users can view some extra content.{" "}
         {/*As an example, when reading

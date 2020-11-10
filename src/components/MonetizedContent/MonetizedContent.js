@@ -142,8 +142,7 @@ export default function MonetizedContent(props) {
           Song is{" "}
           <Link
             href="https://www.youtube.com/watch?v=FEciLhiKcQA"
-            text="Lonely Troutman II by Will Rosati"
-          />
+          >Lonely Troutman II by Will Rosati</Link>
         </p>
       ) : null}
     </div>
