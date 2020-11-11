@@ -73,8 +73,8 @@ export default function Home(props) {
       ) : null}
       <h2>How can it be done</h2>
       <p>
-        Much like the example on the Home-page with the 100+20 rule, you have to
-        get your hand dirty with the{" "}
+        Much like the example with the 100+20 rule, you have to get your hands
+        dirty with the{" "}
         <Link href="https://webmonetization.org/docs/api">Javascript API</Link>.
         How it's been implemented here is simply that when{" "}
         <Code>document.monetization</Code> emits a{" "}
