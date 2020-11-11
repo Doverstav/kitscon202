@@ -12,6 +12,8 @@ import "./Ads.css";
 import Ad250x300 from "../../res/ad250x300.png";
 import Ad728x90 from "../../res/ad728x90.png";
 import Preamble from "../common/Preamble";
+import Link from "../common/Link";
+import Code from "../common/Code";
 
 export default function Home(props) {
   // Init this to WM_STATE_STARTED to avoid the "ads" flashing when navigating to page
@@ -66,6 +68,21 @@ export default function Home(props) {
         advertisements, and a non-paying user will instead pay for themselves by
         viewing your tastefully inserted ads.
       </Preamble>
+      {monetizationState !== WM_STATE_STARTED ? (
+        <img className="Ads-ad-box" src={Ad250x300} alt="" />
+      ) : null}
+      <h2>How can it be done</h2>
+      <p>
+        Much like the example on the Home-page with the 100+20 rule, you have to
+        get your hand dirty with the{" "}
+        <Link href="https://webmonetization.org/docs/api">Javascript API</Link>.
+        How it's been implemented here is simply that when{" "}
+        <Code>document.monetization</Code> emits a{" "}
+        <Code>monetizationstart</Code> event, ads are removed from the page. If
+        a <Code>monetizationstop</Code> event is emitted, or if{" "}
+        <Code>document.monetization</Code> is <Code>undefined</Code>, ads are
+        displayed to the user.
+      </p>
       {monetizationState !== WM_STATE_STARTED ? (
         <img className="Ads-ad-box" src={Ad250x300} alt="" />
       ) : null}
