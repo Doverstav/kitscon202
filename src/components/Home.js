@@ -13,6 +13,7 @@ import Separator from "./common/Separator";
 
 import "./Home.css";
 import Preamble from "./common/Preamble";
+import Code from "./common/Code";
 
 export default function Home(props) {
   const [monetizationState, setMonetizationState] = useState(undefined);
@@ -63,34 +64,51 @@ export default function Home(props) {
         Monetization can be used, and tries to show that it is rather simple to
         create a Web Monetized website.
       </Preamble>
-      <h2>A proposed standard</h2>
+      <h2>
+        Websites working with <Code>{"<meta>"}</Code>
+      </h2>
       <p>
-        As Web Monetization is a proposed standard, it is not part of any
-        browser today. Instead, users must have a Web Monetization provider, of
-        which there today exists only one,{" "}
-        <Link href="https://coil.com/">Coil</Link>. So, in order to make this
-        website usable by anyone, it allows the user to inject a fake Web
-        Monetization provider. This provider can also easily be removed to
-        easily compare between monetized and non-monetized versions.
+        In the <Code>{"<head>"}</Code> of this I've added a{" "}
+        <Link href="">payment pointer</Link> inside a meta tag, like this{" "}
+        <Code>
+          {'<meta name="monetization" content="$alice.wallet.example" />'}
+        </Code>
+        . Simply doing this is enough to receive money using Web Monetization!
+        The payment pointer used here doesn't point to an actual wallet, but
+        getting a real pointer is{" "}
+        <Link href="https://webmonetization.org/docs/ilp-wallets/">
+          fairly easy
+        </Link>
+        .
+      </p>
+      <h2>Making things interesting</h2>
+      <p>
+        However, simply receiving money doesn't make for a very interesting
+        website. In order to create some value for monetized visitors, you have
+        to use the{" "}
+        <Link href="https://webmonetization.org/docs/api">Javascript API</Link>.
+        Doing this consists mostly of listening to events emitted from{" "}
+        <Code>document.monetization</Code>, such as{" "}
+        <Code>monetizationstart</Code> or <Code>monetizationstop</Code>.
       </p>
       <h2>The 100+20 rule</h2>
       <p>
-        This startpage demonstrates the so called{" "}
+        So what interesting things can be done with a Web Monetized site? One
+        example is the{" "}
         <Link href="https://coil.com/p/coil/The-100-20-Rule-for-Premium-Content/3l1ALJ3M6">
           100+20 rule
         </Link>{" "}
-        for written content, where the free content is a complete article, but
-        monetized users can view some extra content.{" "}
-        {/*As an example, when reading
-        a recipe, the additional content may be variations on the recipe, or the
-        recipe to some side dish that goes great with the main recipe.*/}
+        where you have some free content available for all visitors, but
+        monetized users will see some extra content, the bonus 20 percent, which
+        should ideally be worth both their time and money.
       </p>
       <p>
-        The bonus content for this page can be seen at the bottom. Click the
-        "Start Web Monetization" to inject the monetization object and access
-        the exclusive content! Below that button you will also find whether the
-        current page has a Web Monetization tag, the current monetization state
-        and how much (fake) money has been sent during this session.
+        The bonus content for this page can be found at the bottom. Click "Start
+        Web Monetization" to mock <Code>document.monetization</Code> and gain
+        access to the exclusive content! Below the button you will find a
+        rudimentary dashboard displaying whether the current page has a Web
+        Monetization tag, the current monetization state and how much money has
+        been sent during this session.
       </p>
       <Separator />
       <p>
