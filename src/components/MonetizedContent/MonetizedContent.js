@@ -12,6 +12,7 @@ import {
 } from "../WebMonetizationSpoofer/WebMonetizationSpoofer";
 import Separator from "../common/Separator";
 import Preamble from "../common/Preamble";
+import Code from "../common/Code";
 
 export default function MonetizedContent(props) {
   const audioPlayer = useRef();
@@ -119,18 +120,24 @@ export default function MonetizedContent(props) {
       <h1>Monetized Content</h1>
       <Preamble>
         For some services, it may only make sense for the user to pay while they
-        are consuming content. Examples of such services are Spotify and
-        Youtube. So instead of the user streaming payments by visiting the site,
-        they are instead streaming payments for every second of content enjoyed.
+        are consuming content. Instead of the user streaming payments by
+        visiting the site, they are instead streaming payments for every second
+        of content enjoyed.
       </Preamble>
+      <h2>A different approach</h2>
+      <p>
+        This example differs from the other in that it does not simply check the
+        status of <Code>document.monetization</Code> to determine what to show
+        to the visitor, it also manipulates the monetization tag to ensure it
+        only receives payments when the user consumes some content.
+      </p>
       <h2>Pay as you listen</h2>
       <p>
-        Viewing this page with Web Monetization enabled will allow you to play a
-        song. Notice that while the song is not playing, Web Monetization is
-        stopped, and the website does not have a Web Monetization tag. When
-        clicking play, a tag is inserted and Web Monetization starts
-        automatically, sending money while the song is playing. Pausing removes
-        the tag again and Web Monetization automatically stops.
+        Notice that while the song is not playing, Web Monetization is stopped,
+        and the website does not have a Web Monetization tag. When clicking
+        play, a tag is inserted and Web Monetization starts automatically,
+        sending money while the song is playing. Pausing removes the tag again
+        and Web Monetization automatically stops.
       </p>
       <Separator />
       <audio controls ref={audioPlayer}>
@@ -145,7 +152,11 @@ export default function MonetizedContent(props) {
             Lonely Troutman II by Will Rosati
           </Link>
         </p>
-      ) : null}
+      ) : (
+        <p className="Monetized-Content-text-small">
+          Start Web Monetization to access content!
+        </p>
+      )}
     </div>
   );
 }
