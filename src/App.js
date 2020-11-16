@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Home from "./components/Home";
 import Ads from "./components/Ads/Ads";
@@ -19,6 +19,24 @@ function App() {
   const [displayedComponent, setDisplayedComponent] = useState(
     <Home spoofState={isSpoofing} />
   );
+  const sidebar = useRef();
+
+  const hideSidebar = () => {
+    sidebar.current.style.transform = "translateX(-100%)";
+  };
+
+  const showSidebar = () => {
+    sidebar.current.style.transform = "translateX(0)";
+  };
+
+  useEffect(() => {
+    // Reset local style when mediq query changes
+    // If this isn't done, effet from opening/closing
+    // the menu will persist and break the site
+    window.matchMedia("(min-width: 992px)").addEventListener("change", () => {
+      sidebar.current.style.transform = "";
+    });
+  }, []);
 
   useEffect(() => {
     if (activePage === ADS) {
@@ -26,7 +44,7 @@ function App() {
     } else if (activePage === MONETIZED_CONTENT) {
       setDisplayedComponent(<MonetizedContent spoofState={isSpoofing} />);
     } else if (activePage === ABOUT) {
-      setDisplayedComponent(<About />)
+      setDisplayedComponent(<About />);
     } else {
       setDisplayedComponent(<Home spoofState={isSpoofing} />);
     }
@@ -34,7 +52,10 @@ function App() {
 
   return (
     <div className="App">
-      <div className="sidebar">
+      <div ref={sidebar} className="sidebar">
+        <span className="App-menu-close" onClick={() => hideSidebar()}>
+          &times;
+        </span>
         <h1 className="sidebar-header">Navigation</h1>
         <Button
           onClick={() => setActivePage(HOME)}
@@ -66,7 +87,12 @@ function App() {
           setSpoofState={(spoofState) => setIsSpoofing(spoofState)}
         />
       </div>
-      <div className="content">{displayedComponent}</div>
+      <div className="content">
+        <span className="App-menu-open" onClick={() => showSidebar()}>
+          &gt;
+        </span>
+        {displayedComponent}
+      </div>
     </div>
   );
 }

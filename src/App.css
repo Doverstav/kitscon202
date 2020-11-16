@@ -1,24 +1,67 @@
-.App {
-  min-height: 100vh;
+@media screen and (max-width: 992px) {
+  .App {
+    min-height: 100vh;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    display: grid;
+    grid-template-areas: "content";
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 10;
+
+    transform: translateX(-100%);
+
+    transition: 0.5s;
+  }
+
+  .App-menu-open {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 5;
+    font-size: 48px;
+    cursor: pointer;
+  }
+
+  .App-menu-close {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 48px;
+    cursor: pointer;
+  }
 }
 
-.dollar-sign-image {
-  display: block;
-  max-width: 50%;
-  margin: auto;
+@media screen and (min-width: 992px) {
+  .App {
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-areas: "nav content";
+    grid-template-columns: 400px auto;
+  }
+
+  .App-menu-close {
+    display: none;
+  }
+
+  .App-menu-open {
+    display: none;
+  }
 }
 
 .sidebar {
+  grid-area: nav;
   box-sizing: border-box;
 
-  min-width: 250px;
-  width: 400px;
-
   background-color: #7ac4bb;
+
+  width: 400px;
 
   padding: 16px;
 
@@ -30,6 +73,7 @@
 }
 
 .content {
+  grid-area: content;
   box-sizing: border-box;
 
   background-color: #f2f2ee; /* Maybe?!?! */
@@ -38,7 +82,6 @@
 
   padding-top: 16px;
   padding-bottom: 16px;
-  padding-right: 64px;
-  padding-left: 64px;
-  
+  padding-right: 48px;
+  padding-left: 48px;
 }
