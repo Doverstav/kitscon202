@@ -6,10 +6,12 @@ import MonetizedContent from "./components/MonetizedContent/MonetizedContent";
 import WebMonetizationSpoofer from "./components/WebMonetizationSpoofer/WebMonetizationSpoofer";
 import Button from "./components/common/Button";
 import Separator from "./components/common/Separator";
+import About from "./components/About/About";
 
+const ABOUT = "About";
 const ADS = "Ads";
-const MONETIZED_CONTENT = "MonetizedContent";
 const HOME = "Home";
+const MONETIZED_CONTENT = "MonetizedContent";
 
 function App() {
   const [isSpoofing, setIsSpoofing] = useState(false);
@@ -23,6 +25,8 @@ function App() {
       setDisplayedComponent(<Ads spoofState={isSpoofing} />);
     } else if (activePage === MONETIZED_CONTENT) {
       setDisplayedComponent(<MonetizedContent spoofState={isSpoofing} />);
+    } else if (activePage === ABOUT) {
+      setDisplayedComponent(<About />)
     } else {
       setDisplayedComponent(<Home spoofState={isSpoofing} />);
     }
@@ -50,15 +54,19 @@ function App() {
           active={activePage === MONETIZED_CONTENT}
           leftAlign={true}
         />
+        <Button
+          onClick={() => setActivePage(ABOUT)}
+          text={"About"}
+          active={activePage === ABOUT}
+          leftAlign={true}
+        />
         <Separator />
         <h1 className="sidebar-header">Dashboard</h1>
         <WebMonetizationSpoofer
           setSpoofState={(spoofState) => setIsSpoofing(spoofState)}
         />
       </div>
-      <div className="content">
-        {displayedComponent}
-      </div>
+      <div className="content">{displayedComponent}</div>
     </div>
   );
 }
