@@ -1,8 +1,8 @@
 # What this is
 
-This is a website displaying some simple examples of how [Web Monetization](https://webmonetization.org/) can be used. It was developed to be used as a demo for a prestentation at KitsCon 20.2. It is intended as an informational and educational tool, where one can gain some information about how Web Monetization can be used and gain some insight in how it is implemented on a website.
+This is a website displaying some simple examples of how [Web Monetization](https://webmonetization.org/) can be used. It was developed to be used as a demo for a prestentation at KitsCon 20.2. It is intended as an informational and educational tool, where one can gain some insight about how Web Monetization can be used and how it can be implemented on a website.
 
-The webstie can be found on [doverstav.github.io/kitscon202](https://doverstav.github.io/kitscon202/).
+The website can be found on [doverstav.github.io/kitscon202](https://doverstav.github.io/kitscon202/).
 
 ## Available Scripts
 
