@@ -2,7 +2,7 @@
 
 This is a website displaying some simple examples of how [Web Monetization](https://webmonetization.org/) can be used. It was developed to be used as a demo for a prestentation at KitsCon 20.2. It is intended as an informational and educational tool, where one can gain some information about how Web Monetization can be used and gain some insight in how it is implemented on a website.
 
-The webstie can be found on [doverstav.github.io/kitscon202](doverstav.github.io/kitscon202).
+The webstie can be found on [doverstav.github.io/kitscon202](https://doverstav.github.io/kitscon202/).
 
 ## Available Scripts
 
@@ -35,4 +35,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run deploy`
 
-Deploy site to [github pages](doverstav.github.io/kitscon202)
+Deploy site to github pages using [gh-pages](https://www.npmjs.com/package/gh-pages).
