@@ -11,9 +11,8 @@ export default function About(props) {
       <h1>About</h1>
       <Preamble>
         This page contains some information about about the more technical
-        aspects of this site, and at the end there's a short list of links where
-        an interested person can read some more about Web Monetization and
-        related topics.
+        aspects of this site, and at the end there's a short list of links with
+        additional information about Web Monetization and related topics.
       </Preamble>
       <h2>Some technicalities</h2>
       <h3>Checking out the code</h3>
@@ -36,8 +35,9 @@ export default function About(props) {
         Mocking <Code>document.monetization</Code>
       </h3>
       <p>
-        Implementation is based on the <Link>JavaScript API</Link> and inspired
-        by the{" "}
+        Implementation is based on the{" "}
+        <Link href="https://webmonetization.org/docs/api/">JavaScript API</Link>{" "}
+        and inspired by the{" "}
         <Link href="https://glitch.com/edit/#!/wm-exclusive-content-basic?path=wm-previewer.js%3A156%3A1">
           official examples
         </Link>
