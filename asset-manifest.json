@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/kitscon202/static/css/main.65b7210e.chunk.css",
-    "main.js": "/kitscon202/static/js/main.30002e44.chunk.js",
-    "main.js.map": "/kitscon202/static/js/main.30002e44.chunk.js.map",
+    "main.js": "/kitscon202/static/js/main.d7ccfbd0.chunk.js",
+    "main.js.map": "/kitscon202/static/js/main.d7ccfbd0.chunk.js.map",
     "runtime-main.js": "/kitscon202/static/js/runtime-main.7d080dcd.js",
     "runtime-main.js.map": "/kitscon202/static/js/runtime-main.7d080dcd.js.map",
     "static/js/2.2063ad68.chunk.js": "/kitscon202/static/js/2.2063ad68.chunk.js",
     "static/js/2.2063ad68.chunk.js.map": "/kitscon202/static/js/2.2063ad68.chunk.js.map",
     "index.html": "/kitscon202/index.html",
-    "precache-manifest.5dfceefad5d3f89b9737be1554727af4.js": "/kitscon202/precache-manifest.5dfceefad5d3f89b9737be1554727af4.js",
+    "precache-manifest.51e3bbb180bc6ed431f41cb891b18a80.js": "/kitscon202/precache-manifest.51e3bbb180bc6ed431f41cb891b18a80.js",
     "service-worker.js": "/kitscon202/service-worker.js",
     "static/css/main.65b7210e.chunk.css.map": "/kitscon202/static/css/main.65b7210e.chunk.css.map",
     "static/js/2.2063ad68.chunk.js.LICENSE.txt": "/kitscon202/static/js/2.2063ad68.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.7d080dcd.js",
     "static/js/2.2063ad68.chunk.js",
     "static/css/main.65b7210e.chunk.css",
-    "static/js/main.30002e44.chunk.js"
+    "static/js/main.d7ccfbd0.chunk.js"
   ]
 }
