@@ -71,7 +71,7 @@ export default function Home(props) {
       {monetizationState !== WM_STATE_STARTED ? (
         <img className="Ads-ad-box" src={Ad250x300} alt="" />
       ) : null}
-      <h2>How can it be done</h2>
+      <h2>Easily achieved</h2>
       <p>
         Much like the example with the 100+20 rule, you have to get your hands
         dirty with the{" "}
@@ -90,7 +90,7 @@ export default function Home(props) {
       <p>
         To remove the ads, turn on Web Monetization. After a second, when the
         Web Monetization status has gone from pending to started, the ads will
-        disappear! To bring them back, simply stop the Web Monetization again,
+        disappear! To bring them back, simply stop Web Monetization again,
         and the ads will pop back in!
       </p>
       {monetizationState !== WM_STATE_STARTED ? (

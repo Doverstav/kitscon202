@@ -68,7 +68,7 @@ export default function Home(props) {
         Websites working with <Code>{"<meta>"}</Code>
       </h2>
       <p>
-        In the <Code>{"<head>"}</Code> of this I've added a{" "}
+        In the <Code>{"<head>"}</Code> of this site I've added a{" "}
         <Link href="">payment pointer</Link> inside a meta tag, like this{" "}
         <Code>
           {'<meta name="monetization" content="$alice.wallet.example" />'}
@@ -122,11 +122,10 @@ export default function Home(props) {
         <>
           <h2>Exclusive content</h2>
           <p>
-            So this is the exlusive content you were promised! It's not a lot,
-            but here it is. I can't give you much, but I can give you this
-            advice. Explore the other pages on this site via the navigation the
-            your left to see more examples! And visit the "About" page for more
-            details on how this all works.
+            Here is your exclusive content, as promised! Hopefully, you'll feel
+            that it is worth your hard earned money! Now, go explore the other
+            pages on this site via the navigation the your left to see more
+            examples!
           </p>
         </>
       ) : null}
