@@ -208,7 +208,7 @@ export default function WebMonetizationSpoofer(props) {
         <span>{wmStatus ? wmStatus : "undefined"}</span>
       </p>
       <p className="WMSpoofer-status-container">
-        Money sent: <span ref={moneyCounter}>{totalMoneySent}</span>
+        Money sent: <span ref={moneyCounter}>{totalMoneySent} SEK</span>
       </p>
     </div>
   );
